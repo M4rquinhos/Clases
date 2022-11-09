@@ -1,5 +1,6 @@
 ﻿
 using Clases;
+using System.Net.WebSockets;
 
 var carro1 = new Carro("Toyota");
 //carro1.Marca = "Toyota";
@@ -133,3 +134,97 @@ switch (carro)
         Console.WriteLine("Apenas andas pa");
         break;
 }
+
+
+
+//Tipos anonimos (classes)
+
+//clase normal
+var carro4 = new Carro() { Marca = "Toyota", Año = 2005 };
+
+//Tipo anonimo (clase sin nombre) sus propiedades no se pueden editar
+var persona = new { Nombre = "Marco", Apellido = "Carrillo", Edad = 23 };
+
+
+
+//structs xd
+
+var puntoA = new Punto(3, 4);
+
+//error
+//puntoA = null;
+
+
+//Esto es valido
+
+var puntoB = new Punto();
+
+Console.WriteLine($"La distancia entre el Punto A y el Punto B es: {puntoA.Distancia(puntoB)}");
+
+
+
+//Records == clases == structs
+
+
+var persona1 = new Persona("Marco", "Carrillo");
+
+var persona2 = new Persona("Marco", "Carrillo");
+
+var sonIguales = persona1 == persona2;
+
+Console.WriteLine($"¿Son los 2 records iguales? {sonIguales}");
+
+persona1 = null;
+
+
+//Record posicional
+
+var empresa1 = new Empresa("POLybAr", 1989);
+
+//Error: No podemos modificar nombre, es inmutable
+//empresa1.Nombre = "Google";
+
+var (Nombre, Año) = empresa1;
+
+Console.WriteLine($"Nombre de la empresa: {Nombre}");
+Console.WriteLine($"Año de la empresa: {Año}");
+
+
+
+//Clases con propiedades inmutables con init
+var clase = new ClaseConPropiedadesInmutables()
+{
+    Propiedad1 = 42,
+    Propiedad2 = "MARCO",
+    Propiedad3 = true,
+};
+
+
+//Acceder a valores NULL de una manera segura usando el operador Elvis? tek xd
+
+int[]? arr = { 1, 2 };
+
+arr = null;
+
+Console.WriteLine($"La longitud del arreglo es: {arr?.Length}");
+
+
+
+//Operador de Coalescencia Nula xd
+
+//Ejemplo 1: Uso simple
+
+int[]? numeros = new int[] { 1, 2 };
+
+numeros = null;
+
+var conteo = numeros?.Length ?? 0;
+
+Console.WriteLine(conteo);
+
+//Ejemplo 2: Cambiando el valor de una variable
+
+numeros ??= new int[] { };
+
+Console.WriteLine($"¿Es nulo? {numeros is null}");
+Console.WriteLine($"¿Es un arrglo vacio? {numeros?.Length == 0}");
